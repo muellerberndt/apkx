@@ -30,6 +30,14 @@ The default combination of converter and decompiler is <code>dex2jar</code> and 
 $ apkx -d procyon HelloWorld.apk
 ```
 
+## Tools
+
+This script integrates the following tools:
+
+- [Procyon](https://bitbucket.org/mstrobel/procyon) by Mike Strobel - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
+- [CFR](http://www.benf.org/other/cfr/) by Lee Benfield  - [MIT License](https://opensource.org/licenses/MIT)
+- [dex2jar](https://github.com/pxb1988/dex2jar) by Bob Pan - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
+
 ## About
 
 This script accompanies the [OWASP Mobile Security Testing Guide](https://github.com/OWASP/owasp-mstg). For further instructions and usage examples, see also:
