@@ -1,16 +1,13 @@
 # apkx - Extract Java Sources from Android APK Archives
 
-A simple Python wrapper to [dex2jar](https://github.com/pxb1988/dex2jar) and [CFR](http://www.benf.org/other/cfr/) that unzips an APK and decompiles Java bytecode contained in classes.dex.
+A Python wrapper to various dex converters and Java decompilers. It unzips an APK and decompiles Java bytecode contained in dex files.
 
 ## Installation
 
 To download and install use:
 
 ```bash
-$ wget https://raw.githubusercontent.com/OWASP/owasp-mstg/master/OMTG-Files/Download/apkx-0.9.tgz
-$ tar xzf apkx-0.9.tgz
-$ cd apkx-0.9
-$ sudo ./install.sh
+(todo)
 ```
 
 ## Usage
