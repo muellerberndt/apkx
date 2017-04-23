@@ -1,6 +1,6 @@
 # apkx - One-Step Android APK Decompilation
 
-A Python wrapper to popular free dex converters and Java decompilers. Extracts Java source code directly from the APK. Useful to speed up the process play with different combinations of converter/decompiler without having to worry with classpath settings and command line args.
+A Python wrapper to popular free dex converters and Java decompilers. Extracts Java source code directly from the APK. Useful for experimenting with different converters/decompilers without having to worry about classpath settings and command line args.
 
 ## Installation
 
