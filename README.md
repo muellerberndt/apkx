@@ -18,6 +18,10 @@ Pass the APK filename on the command line:
 
 ```bash
 $ apkx HelloWorld.apk 
+Extracting HelloWord.apk to HelloWord
+Converting: classes.dex -> classes.jar (dex2jar)
+dex2jar HelloWord/classes.dex -> HelloWord/classes.jar
+Decompiling to HelloWord/src (cfr)
 ```
 
 The default combination of converter and decompiler is <code>dex2jar</code> and <code>cfr</code>. Use the <code>-c</code> and <code>-d</code> flags to change this. E.g.:
