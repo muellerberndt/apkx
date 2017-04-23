@@ -1,6 +1,6 @@
 # apkx - Extract Java Sources from Android APK Archives
 
-A Python wrapper to various dex converters and Java decompilers. It unzips an APK and decompiles Java bytecode contained in dex files.
+A Python wrapper to various dex converters and Java decompilers. Produces Java source code directly from the APK.
 
 ## Installation
 
