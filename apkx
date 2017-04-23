@@ -36,7 +36,6 @@ def decompile(decompiler, jar_path, ext_path):
 		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', jar_path, 'org.benf.cfr.reader.Main', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'])
 
 
-
 '''
 ====== Main ======
 '''
@@ -99,5 +98,4 @@ for root, dirs, files in os.walk(ext_path):
 				decompile(args.decompiler, jar_path, ext_path)
 			except Exception as e:
 				print('Error decompiling:' + str(e))
-
 
