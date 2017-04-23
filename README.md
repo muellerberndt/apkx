@@ -1,14 +1,16 @@
 # apkx - Extract Java Sources from Android APK Archives
 
-A Python wrapper to various dex converters and Java decompilers. Produces Java source code directly from the APK.
+A Python wrapper to popular dex converters and Java decompilers. Extracts Java source code directly from the APK.
 
 ## Installation
 
-To download and install use:
-
 ```bash
-(todo)
+$ git clone https://github.com/b-mueller/apkx
+$ cd apkx
+$ sudo ./install.sh
 ```
+
+Note: JRE needs to be installed and in PATH.
 
 ## Usage
 
@@ -16,11 +18,12 @@ Pass the APK filename on the command line:
 
 ```bash
 $ apkx HelloWorld.apk 
-Extracting HelloWorld.apk to HelloWorld
-dex2jar HelloWorld/classes.dex -> HelloWorld/classes.jar
-Decompiling to HelloWorld/src
-$ ls HelloWorld/src/com/example/helloworld/
-BuildConfig.java	MainActivity.java	R.java
+```
+
+The default combination of converter and decompiler is <code>dex2jar</code> and <code>cfr</code>. Use the <code>-c</code> and <code>-d</code> flags to change this. E.g.:
+
+```bash
+$ apkx -d procyon HelloWorld.apk
 ```
 
 ## About

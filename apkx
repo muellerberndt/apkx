@@ -1,8 +1,8 @@
 #!/usr/bin/python
 #
-# apkx -- A Python wrapper for dex2jar and CFR. Use to extract and decompile Java code from Android APK.
-# Because nobody likes messing with Java classpaths & command lines.
-# v0.9.1
+# apkx -- A Python wrapper for popular dex converters and Java decompilers.
+# Because nobody likes messing with Java classpaths & jar command lines.
+# v0.9.2
 #
 # Author: Bernhard Mueller
 # This file is part of the OWASP Mobile Testing Guide (https://github.com/OWASP/owasp-mstg)
@@ -23,6 +23,7 @@ import zipfile
 import re
 import argparse
 
+FNULL = open(os.devnull, 'w')
 
 def dextojar(converter, jar_path, ext_path):
 
@@ -33,7 +34,9 @@ def dextojar(converter, jar_path, ext_path):
 def decompile(decompiler, jar_path, ext_path):
 
 	if (decompiler == 'cfr'):
-		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', jar_path, 'org.benf.cfr.reader.Main', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'])
+		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', jar_path, 'org.benf.cfr.reader.Main', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'], stdout=FNULL)
+	elif (decompiler == 'procyon'):
+		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', jar_path, 'com.strobel.decompiler.DecompilerDriver', '-jar', ext_path + '/' + jar_filename, '--o', src_path], stdout=FNULL)
 
 
 '''
@@ -43,7 +46,7 @@ def decompile(decompiler, jar_path, ext_path):
 parser = argparse.ArgumentParser(description='Decompile an Android APK archive.')
 
 parser.add_argument('-c', '--converter', help='Dex to jar conversion method (default: dex2jar)', choices=['dex2jar',], default = "dex2jar")
-parser.add_argument('-d', '--decompiler', help='Decompiler backend to use (default: cfr)', choices=['cfr',], default = "cfr")
+parser.add_argument('-d', '--decompiler', help='Decompiler backend to use (default: cfr)', choices=['cfr','procyon'], default = "cfr")
 parser.add_argument('apkfile', help='File to decompile')
 
 args = parser.parse_args()
@@ -76,7 +79,7 @@ for root, dirs, files in os.walk(ext_path):
 		if file.endswith((".dex")):
 			jar_filename = os.path.splitext(file)[0] + ".jar"
 
-			print('Converting: ' + file + ' -> ' + jar_filename)
+			print('Converting: ' + file + ' -> ' + jar_filename + ' (' + args.converter + ')')
 
 			'''
 				Conversion Step
@@ -92,7 +95,7 @@ for root, dirs, files in os.walk(ext_path):
 				Decompilation Step
 			'''
 
-			print("Decompiling to " + src_path)
+			print("Decompiling to " + src_path  + ' (' + args.decompiler + ')')
 
 			try:
 				decompile(args.decompiler, jar_path, ext_path)
