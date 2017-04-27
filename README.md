@@ -33,6 +33,12 @@ The default combination of converter and decompiler is <code>dex2jar</code> and 
 $ apkx -c enjarify -d procyon HelloWorld.apk
 ```
 
+To get help, run:
+
+```bash
+$ apkx -h
+```
+
 ## Tools
 
 This script integrates the following tools:
