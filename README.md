@@ -12,7 +12,7 @@ $ sudo ./install.sh
 
 Notes: 
 
-- JRE needs to be installed and in PATH;
+- JRE needs to be installed and in PATH
 - enjarify requires Python 3
 
 ## Usage
