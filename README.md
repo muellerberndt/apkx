@@ -37,6 +37,7 @@ This script integrates the following tools:
 - [Procyon](https://bitbucket.org/mstrobel/procyon) by Mike Strobel - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
 - [CFR](http://www.benf.org/other/cfr/) by Lee Benfield  - [MIT License](https://opensource.org/licenses/MIT)
 - [dex2jar](https://github.com/pxb1988/dex2jar) by Bob Pan - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
+- [enjarify](https://github.com/Storyyeller/enjarify) by Storyyeller - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## About
 
