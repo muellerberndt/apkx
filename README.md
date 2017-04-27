@@ -27,7 +27,7 @@ Decompiling to HelloWord/src (cfr)
 The default combination of converter and decompiler is <code>dex2jar</code> and <code>cfr</code>. Use the <code>-c</code> and <code>-d</code> flags to change this. E.g.:
 
 ```bash
-$ apkx -d procyon HelloWorld.apk
+$ apkx -c enjarify -d procyon HelloWorld.apk
 ```
 
 ## Tools

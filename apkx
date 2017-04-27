@@ -23,20 +23,22 @@ import zipfile
 import re
 import argparse
 
+cwd = os.path.dirname(os.path.realpath(__file__))
 FNULL = open(os.devnull, 'w')
 
-def dextojar(converter, jar_path, ext_path):
+def convert(converter, lib_path, ext_path, infile, outfile):
 
 	if (converter == 'dex2jar'):
-		subprocess.call(['java', '-Xms512m', '-Xmx1024m', '-cp', jar_path, 'com.googlecode.dex2jar.tools.Dex2jarCmd', ext_path + '/' + file, '-o', ext_path + '/' + jar_filename, '-f'])
+		subprocess.call(['java', '-Xms512m', '-Xmx1024m', '-cp', lib_path, 'com.googlecode.dex2jar.tools.Dex2jarCmd', ext_path + '/' + infile, '-o', ext_path + '/' + outfile, '-f'])
+	elif (converter == 'enjarify'):
+		subprocess.call([cwd + '/enjarify.pex', ext_path + '/' + infile, '-o', ext_path + '/' + outfile, '--force'])
 
-
-def decompile(decompiler, jar_path, ext_path):
+def decompile(decompiler, lib_path, ext_path, jar_filename):
 
 	if (decompiler == 'cfr'):
-		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', jar_path, 'org.benf.cfr.reader.Main', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'], stdout=FNULL)
+		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', lib_path, 'org.benf.cfr.reader.Main', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'], stdout=FNULL)
 	elif (decompiler == 'procyon'):
-		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', jar_path, 'com.strobel.decompiler.DecompilerDriver', '-jar', ext_path + '/' + jar_filename, '--o', src_path], stdout=FNULL)
+		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', lib_path, 'com.strobel.decompiler.DecompilerDriver', '-jar', ext_path + '/' + jar_filename, '--o', src_path], stdout=FNULL)
 
 
 '''
@@ -45,7 +47,7 @@ def decompile(decompiler, jar_path, ext_path):
 
 parser = argparse.ArgumentParser(description='Decompile an Android APK archive.')
 
-parser.add_argument('-c', '--converter', help='Dex to jar conversion method (default: dex2jar)', choices=['dex2jar',], default = "dex2jar")
+parser.add_argument('-c', '--converter', help='Dex to jar conversion method (default: dex2jar)', choices=['dex2jar','enjarify'], default = "dex2jar")
 parser.add_argument('-d', '--decompiler', help='Decompiler backend to use (default: cfr)', choices=['cfr','procyon'], default = "cfr")
 parser.add_argument('apkfile', help='File to decompile')
 
@@ -58,7 +60,7 @@ args = parser.parse_args()
 ext_path = os.path.splitext(os.path.basename(args.apkfile))[0]
 src_path = ext_path + "/src"
 
-jar_path = os.path.dirname(os.path.realpath(__file__)) + "/apkx-libs.jar"
+lib_path = cwd + "/apkx-libs.jar"
 
 print("Extracting " + args.apkfile + " to " + ext_path)
 
@@ -86,7 +88,7 @@ for root, dirs, files in os.walk(ext_path):
 			'''
 
 			try:
-				dextojar(args.converter, jar_path, ext_path)
+				convert(args.converter, lib_path, ext_path, file, jar_filename)
 			except Exception as e:
 				print('Error converting dex to jar:'+ str(e))
 				next
@@ -98,7 +100,7 @@ for root, dirs, files in os.walk(ext_path):
 			print("Decompiling to " + src_path  + ' (' + args.decompiler + ')')
 
 			try:
-				decompile(args.decompiler, jar_path, ext_path)
+				decompile(args.decompiler, lib_path, ext_path, jar_filename)
 			except Exception as e:
 				print('Error decompiling:' + str(e))
 
