@@ -10,7 +10,10 @@ $ cd apkx
 $ sudo ./install.sh
 ```
 
-Note: JRE needs to be installed and in PATH.
+Notes: 
+
+- JRE needs to be installed and in PATH;
+- enjarify requires Python 3
 
 ## Usage
 
