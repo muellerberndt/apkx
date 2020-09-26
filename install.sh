@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ $EUID > 0 ]]; then 
   echo "The installation script needs to be run as root."
